@@ -10,6 +10,8 @@ import { contractABI, contractAddress } from "./datos";
 import { useToast } from "@/hooks/use-toast";
 
 export default function App() {
+    // TODO: DE QUIÉN SON LAS VOTACIONES?
+
     const { toast } = useToast();
     const [address, setAddress] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
@@ -518,9 +520,23 @@ export default function App() {
                                         Nota:
                                     </strong>
                                     &nbsp;Si instalaste MetaMask en tu
-                                    dispositivo móvil, abre el navegador dentro
-                                    de la aplicación e ingresa a esta página
-                                    para conectarte y realizar transacciones.
+                                    dispositivo móvil
+                                    <ul className="list-disc pl-5">
+                                        <li>Copia el enlace de esta página.</li>
+                                        <li>
+                                            Abre la aplicación móvil de
+                                            MetaMask.
+                                        </li>
+                                        <li>
+                                            Dirígete al navegador dentro de la
+                                            aplicación.
+                                        </li>
+                                        <li>
+                                            Pega el enlace copiado previamente
+                                            en el navegador de MetaMask e
+                                            ingrésalo.
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
