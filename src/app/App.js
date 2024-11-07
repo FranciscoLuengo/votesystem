@@ -17,13 +17,11 @@ export default function App() {
     const [newProposal, setNewProposal] = useState("");
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const [notification, setNotification] = useState("");
     const [instalar, setInstalar] = useState(false);
 
     const connectWallet = async () => {
         setLoading(true);
         setErrorMessage("");
-        setNotification("");
 
         try {
             if (typeof window.ethereum !== "undefined") {
@@ -86,7 +84,6 @@ export default function App() {
 
     const addProposal = async () => {
         setLoading(true);
-        setNotification("");
         try {
             const provider = new BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
@@ -96,8 +93,6 @@ export default function App() {
             await tx.wait();
             setNewProposal("");
             await fetchProposals(contract);
-            setErrorMessage("");
-            setNotification("Propuesta agregada con éxito.");
             toast({
                 variant: "success",
                 title: "Success",
@@ -117,7 +112,6 @@ export default function App() {
 
     const removeProposal = async (name) => {
         setLoading(true);
-        setNotification("");
         try {
             const provider = new BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
@@ -126,8 +120,6 @@ export default function App() {
             const tx = await contract.removeProposalByName(name);
             await tx.wait();
             await fetchProposals(contract);
-            setErrorMessage("");
-            //setNotification("Propuesta eliminada con éxito.");
             toast({
                 variant: "success",
                 title: "Success",
@@ -135,13 +127,11 @@ export default function App() {
             });
         } catch (error) {
             console.error("Error al eliminar propuesta:", error);
-            //setErrorMessage("Error al eliminar propuesta.");
             toast({
                 variant: "destructive",
                 title: "Error",
                 description: "Error al eliminar propuesta.",
             });
-            setNotification("");
         } finally {
             setLoading(false);
         }
@@ -149,7 +139,7 @@ export default function App() {
 
     const vote = async (index) => {
         setLoading(true);
-        setNotification("");
+
         try {
             const provider = new BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
@@ -158,8 +148,6 @@ export default function App() {
             const tx = await contract.vote(index);
             await tx.wait();
             await fetchProposals(contract);
-            setErrorMessage("");
-            setNotification("Voto emitido con éxito.");
             toast({
                 variant: "success",
                 title: "Success",
@@ -187,7 +175,7 @@ export default function App() {
 
     const removeVote = async () => {
         setLoading(true);
-        setNotification("");
+
         try {
             const provider = new BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
@@ -307,8 +295,12 @@ export default function App() {
                                                             </strong>
                                                             <span className="ml-2 text-muted-foreground">
                                                                 (
-                                                                {proposal.votesCount.toString()}{" "}
-                                                                votos)
+                                                                {proposal.votesCount.toString()}
+                                                                {proposal.votesCount.toString() ==
+                                                                "1"
+                                                                    ? " voto"
+                                                                    : " votos"}
+                                                                )
                                                             </span>
                                                         </span>
                                                         <div className="flex gap-2">
@@ -394,7 +386,9 @@ export default function App() {
                     )}
                     {instalar && (
                         <div className="mt-10">
-                            <h1>Instrucciones para instalar MetaMask</h1>
+                            <h1 className="text-xl underline mb-3">
+                                Instrucciones para instalar MetaMask
+                            </h1>
                             <ul className="list-disc pl-5">
                                 {/* Paso 1 */}
                                 <li>
@@ -419,8 +413,8 @@ export default function App() {
                                         </li>
                                         <li>
                                             Haz clic en “Agregar a Chrome” o el
-                                            navegador que uses para instalar la
-                                            extensión.
+                                            navegador/dispositivo que uses para
+                                            instalar la extensión.
                                         </li>
                                     </ul>
                                 </li>
@@ -430,8 +424,8 @@ export default function App() {
                                     <strong>Configurar MetaMask:</strong>
                                     <ul className="list-disc pl-5">
                                         <li>
-                                            Abre la extensión después de
-                                            instalarla.
+                                            Abre la extensión o aplicación
+                                            después de instalarla.
                                         </li>
                                         <li>
                                             Crea una nueva billetera o importa
@@ -459,7 +453,7 @@ export default function App() {
                                             “Redes“ &gt; “Mostrar redes de
                                             prueba“. Actívalo para ver la red de
                                             prueba que necesitamos, en este caso
-                                            <strong> Sepolia</strong>
+                                            <strong> Sepolia.</strong>
                                         </li>
                                     </ul>
                                 </li>
@@ -472,7 +466,8 @@ export default function App() {
                                     <ul className="list-disc pl-5">
                                         <li>
                                             Elige la red de prueba{" "}
-                                            <strong>Sepolia</strong> en MetaMask
+                                            <strong>Sepolia</strong> en
+                                            MetaMask.
                                         </li>
                                         <li>
                                             Visita{" "}
@@ -482,7 +477,7 @@ export default function App() {
                                                 rel="noopener noreferrer"
                                                 className="text-blue-600 underline"
                                             >
-                                                Google Faucet
+                                                Google Faucet.
                                             </a>
                                         </li>
                                         <li>
@@ -498,6 +493,16 @@ export default function App() {
                                         </li>
                                     </ul>
                                 </li>
+                                {/* Nota */}
+                                <li className="mt-5">
+                                    <strong className="text-red-500">
+                                        Nota:
+                                    </strong>
+                                    &nbsp;Si instaló MetaMask en su dispositivo
+                                    móvil, usar el navegador de la aplicación e
+                                    ingresar a esta página para poder conectarse
+                                    y realizar las transacciones.
+                                </li>
                             </ul>
                         </div>
                     )}
@@ -506,12 +511,6 @@ export default function App() {
                         <Alert variant="destructive" className="mt-4">
                             <AlertTitle>Error</AlertTitle>
                             <AlertDescription>{errorMessage}</AlertDescription>
-                        </Alert>
-                    )}
-                    {notification && (
-                        <Alert variant="default" className="mt-4">
-                            <AlertTitle>Success</AlertTitle>
-                            <AlertDescription>{notification}</AlertDescription>
                         </Alert>
                     )}
                 </CardContent>
