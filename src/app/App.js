@@ -444,16 +444,40 @@ export default function App() {
                                     <strong>Activar redes de prueba:</strong>
                                     <ul className="list-disc pl-5">
                                         <li>
-                                            Abre MetaMask y haz clic en el icono
-                                            de tu cuenta en la esquina superior
-                                            derecha.
+                                            <strong>En navegador: </strong>
+                                            <ul className="list-disc pl-5">
+                                                <li>
+                                                    Abre MetaMask y haz clic en
+                                                    el icono de tu cuenta en la
+                                                    esquina superior izquierda
+                                                    que corresponde a la red
+                                                    seleccionada.
+                                                </li>
+                                                <li>
+                                                    Activa “Mostrar redes de
+                                                    prueba“ y selecciona
+                                                    <strong> Sepolia.</strong>
+                                                </li>
+                                            </ul>
                                         </li>
                                         <li>
-                                            Selecciona “Configuración“ &gt;
-                                            “Redes“ &gt; “Mostrar redes de
-                                            prueba“. Actívalo para ver la red de
-                                            prueba que necesitamos, en este caso
-                                            <strong> Sepolia.</strong>
+                                            <strong>
+                                                En dispositivo movil:{" "}
+                                            </strong>
+                                            <ul className="list-disc pl-5">
+                                                <li>
+                                                    Abre MetaMask y haz clic en
+                                                    el ícono ubicado en el
+                                                    centro superior de la
+                                                    aplicación que corresponde a
+                                                    la red seleccionada.
+                                                </li>
+                                                <li>
+                                                    Activa “Mostrar redes de
+                                                    prueba“ y selecciona
+                                                    <strong> Sepolia.</strong>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </li>
@@ -464,11 +488,6 @@ export default function App() {
                                         Obtener fondos de prueba (faucet):
                                     </strong>
                                     <ul className="list-disc pl-5">
-                                        <li>
-                                            Elige la red de prueba{" "}
-                                            <strong>Sepolia</strong> en
-                                            MetaMask.
-                                        </li>
                                         <li>
                                             Visita{" "}
                                             <a
@@ -498,10 +517,10 @@ export default function App() {
                                     <strong className="text-red-500">
                                         Nota:
                                     </strong>
-                                    &nbsp;Si instaló MetaMask en su dispositivo
-                                    móvil, usar el navegador de la aplicación e
-                                    ingresar a esta página para poder conectarse
-                                    y realizar las transacciones.
+                                    &nbsp;Si instalaste MetaMask en tu
+                                    dispositivo móvil, abre el navegador dentro
+                                    de la aplicación e ingresa a esta página
+                                    para conectarte y realizar transacciones.
                                 </li>
                             </ul>
                         </div>
