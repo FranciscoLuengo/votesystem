@@ -1,4 +1,4 @@
-export const contractAddress = "0x140Da0eB56a0e0703e74f6DbF26d5343Eb47Ce9b";
+export const contractAddress = "0x1214DEd9E0B2AF1B72406C22298fB1016A27d25F";
 export const contractABI = [
     { inputs: [], stateMutability: "nonpayable", type: "constructor" },
     {
@@ -36,11 +36,7 @@ export const contractABI = [
             {
                 components: [
                     { internalType: "string", name: "name", type: "string" },
-                    {
-                        internalType: "uint256",
-                        name: "votesCount",
-                        type: "uint256",
-                    },
+                    { internalType: "uint256", name: "votesCount", type: "uint256" },
                 ],
                 internalType: "struct Vote.Proposal[]",
                 name: "",
@@ -67,6 +63,7 @@ export const contractABI = [
         stateMutability: "view",
         type: "function",
     },
+    { inputs: [], name: "removeAllVoters", outputs: [], stateMutability: "nonpayable", type: "function" },
     {
         inputs: [{ internalType: "string", name: "_name", type: "string" }],
         name: "removeProposalByName",
@@ -74,13 +71,7 @@ export const contractABI = [
         stateMutability: "nonpayable",
         type: "function",
     },
-    {
-        inputs: [],
-        name: "removeVote",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-    },
+    { inputs: [], name: "removeVote", outputs: [], stateMutability: "nonpayable", type: "function" },
     {
         inputs: [{ internalType: "uint32", name: "index", type: "uint32" }],
         name: "vote",

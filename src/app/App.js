@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Wallet, Plus, Trash2, Vote, XCircle } from "lucide-react";
+import { Wallet, Plus, Trash2, Vote } from "lucide-react"; //XCircle
 import { contractABI, contractAddress } from "./datos";
 import { useToast } from "@/hooks/use-toast";
 
@@ -26,20 +26,22 @@ export default function App() {
         setErrorMessage("");
 
         try {
-            if (typeof window.ethereum !== "undefined") {
-                const provider = new BrowserProvider(window.ethereum);
+            if (typeof window.ethereum !== "undefined") { // verificar si metamask está instalado
+                const provider = new BrowserProvider(window.ethereum); // crear un proveedor de ethers
+                // solicitar acceso a la cuenta de usuario
                 await window.ethereum.request({
                     method: "eth_requestAccounts",
                 });
-                const signer = await provider.getSigner();
+                const signer = await provider.getSigner(); // obtener la cuenta del usuario
                 const userAddress = await signer.getAddress();
                 setAddress(userAddress);
 
+                // instancia del contrato
                 const contract = new Contract(
                     contractAddress,
                     contractABI,
                     signer
-                );
+                ); 
                 await fetchProposals(contract);
 
                 const chairPerson = await contract.getChairPerson();
@@ -174,7 +176,7 @@ export default function App() {
             setLoading(false);
         }
     };
-
+    /*
     const removeVote = async () => {
         setLoading(true);
 
@@ -202,7 +204,7 @@ export default function App() {
             setLoading(false);
         }
     };
-
+    */
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 p-6 font-sans">
             <Card className="max-w-4xl mx-auto">
@@ -275,7 +277,11 @@ export default function App() {
                                     </CardContent>
                                 </Card>
                             )}
-
+                           {/*}
+                            <h1 className="text-3xl font-semibold mb-4 text-center">
+                                ¿Quién será el ganador?
+                            </h1>
+                            */}
                             {proposals.length > 0 ? (
                                 <Card>
                                     <CardHeader>
@@ -365,7 +371,7 @@ export default function App() {
                                     </AlertDescription>
                                 </Alert>
                             )}
-
+                            {/*
                             {isAdmin && (
                                 <div className="mt-6 flex justify-center">
                                     <Button
@@ -384,6 +390,7 @@ export default function App() {
                                     </Button>
                                 </div>
                             )}
+                                 */}
                         </>
                     )}
                     {instalar && (
